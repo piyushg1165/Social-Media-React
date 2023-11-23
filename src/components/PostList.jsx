@@ -8,7 +8,7 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const PostList = () => {
 
-const {postList, addInitialPosts} = useContext(PostListData);
+const {postList, addPost} = useContext(PostListData);
 const [fetching, setFetching] = useState(false);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const [fetching, setFetching] = useState(false);
         fetch('https://dummyjson.com/posts?limit=10' , {signal})
         .then(res => res.json())
         .then(obj => {
-            addInitialPosts(obj.posts);
+            obj.posts.map((post) => (addPost(post.id, post.title, post.body, post.userId, post.tags, post.reactions)));
             setFetching(false);
         }); 
 

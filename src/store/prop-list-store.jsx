@@ -16,9 +16,9 @@ const postListReducer = (currPostList, action) => {
     else if(action.type === 'ADD_POST'){
         newPostList = [action.payload ,  ...currPostList];
     }
-    else if(action.type === 'ADD_INITIAL_POST'){
-        newPostList = action.payload.posts;
-    }
+    // else if(action.type === 'ADD_INITIAL_POST'){
+    //     newPostList = action.payload.posts;
+    // }
     return newPostList;
 }
 
@@ -26,11 +26,11 @@ const PostListProvider = ({children}) => {
     
     const [postList, dispatchPostList] = useReducer(postListReducer, []);
     
-    const addPost = (userId, postTitle, postBody, reactions, tags) => {
+    const addPost = (postId, postTitle, postBody, userId, tags, reactions) => {
         dispatchPostList({
             type : 'ADD_POST',
             payload : {
-                    id : Date.now(),
+                    id : postId || Date.now(),
                     title : postTitle,
                     body : postBody,
                     reactions : reactions,
@@ -40,14 +40,14 @@ const PostListProvider = ({children}) => {
         });
         };
 
-        const addInitialPosts = (posts) => {
-            dispatchPostList({
-                type : 'ADD_INITIAL_POST',
-                payload : {
-                        posts
-                },
-            });
-            };
+        // const addInitialPosts = (posts) => {
+        //     dispatchPostList({
+        //         type : 'ADD_INITIAL_POST',
+        //         payload : {
+        //                 posts
+        //         },
+        //     });
+        //     };
 
     const deletePost = (postId) => {
         dispatchPostList({
@@ -60,7 +60,7 @@ const PostListProvider = ({children}) => {
 
 
     return <PostList.Provider value={
-        {postList, addPost, deletePost, addInitialPosts}
+        {postList, addPost, deletePost}
     }>{children}</PostList.Provider>
 };
 
