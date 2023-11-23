@@ -10,7 +10,6 @@ const CreatePost = () => {
   const postBodyElement = useRef();
   const reactionsElement = useRef();
   const tagsElement = useRef();
-  const postIdElement = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,7 +18,7 @@ const CreatePost = () => {
     const postBody = postBodyElement.current.value;  
     const reactions = reactionsElement.current.value;  
     const tags = tagsElement.current.value.split(" ");
-    addPost(postId, postTitle, postBody, userId, tags, reactions);
+    addPost(postTitle, postBody, userId, tags, reactions);
 
     userIdElement.current.value = "";
     postTitleElement.current.value = "";

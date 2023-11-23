@@ -19,7 +19,7 @@ const [fetching, setFetching] = useState(true);
         fetch('https://dummyjson.com/posts?limit=10' , {signal})
         .then(res => res.json())
         .then(obj => {
-            obj.posts.map((post) => (addPost(post.id, post.title, post.body, post.userId, post.tags, post.reactions)));
+            addInitialPosts(obj.posts);
             setFetching(false);
         }); 
 
