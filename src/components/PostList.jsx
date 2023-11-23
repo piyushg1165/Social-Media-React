@@ -8,14 +8,14 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const PostList = () => {
 
-const {postList, addPost} = useContext(PostListData);
-const [fetching, setFetching] = useState(false);
+const {postList, addInitialPosts} = useContext(PostListData);
+const [fetching, setFetching] = useState(true);
 
     useEffect(() => {
         const controller = new AbortController;
         const signal = controller.signal;
 
-        setFetching(true);
+        // setFetching(true);
         fetch('https://dummyjson.com/posts?limit=10' , {signal})
         .then(res => res.json())
         .then(obj => {
